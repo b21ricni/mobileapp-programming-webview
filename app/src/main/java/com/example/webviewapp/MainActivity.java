@@ -30,10 +30,10 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         /*
-        * Rename your App. Tip: Values->Strings
-        * Enable Internet access for your App. Tip: Manifest
-        * Create a WebView element in the layout file content_main.xml
-        * Give the WebView element ID "my_webview"
+        * Rename your App. Tip: Values->Strings --done--
+        * Enable Internet access for your App. Tip: Manifest --done--
+        * Create a WebView element in the layout file content_main.xml --done--
+        * Give the WebView element ID "my_webview" --done-
         -- Commit and push to your github fork
         * Create a private member variable called "myWebView" of type WebView
         * Locate the WebView element created in step 1 using the ID created in step 2

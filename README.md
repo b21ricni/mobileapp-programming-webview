@@ -3,37 +3,62 @@
 
 **Skriv din rapport här!**
 
-_Du kan ta bort all text som finns sedan tidigare_.
+Föst så ändrades namnet via values/strings.xml i stringen name="app_name" så lades Upg2 till
+När namnet blivit anpassat så att internet fungerar, detta är gjort i manifests/androidManifest.xml, detta är gjort med uses-permission android:name="android.permission.INTERNET"
+För att kunna hämta funktionen för webview så skapades ett id för den vid namn my_weview i content_main.xml, som även fick ärva width och height av parentselements, efter det så loakliserade vi webview med findViewById och döpte den till myWebView. efter det så enabla vi javascript, laddad in start url och skapade en new webviewclient för att kunna browsa internett på appen.
+slutligen så implementades två funktioner med urler, en för external use och en för internal. För att göra det så skapdes en void funktion utanför där vi hämtade urlerna med loadurl, dem fick namn passande för funktion. Viktigt att declarera WebView myWebView; i början av elementet och att importa webkit för webview
+För att välja mellan external och internal så är det två if funktioner så återkallar void funktionerna vi skapade tidigare för vilken website vi ska öppna.
 
-## Följande grundsyn gäller dugga-svar:
-
-- Ett kortfattat svar är att föredra. Svar som är längre än en sida text (skärmdumpar och programkod exkluderat) är onödigt långt.
-- Svaret skall ha minst en snutt programkod.
-- Svaret skall inkludera en kort övergripande förklarande text som redogör för vad respektive snutt programkod gör eller som svarar på annan teorifråga.
-- Svaret skall ha minst en skärmdump. Skärmdumpar skall illustrera exekvering av relevant programkod. Eventuell text i skärmdumpar måste vara läsbar.
-- I de fall detta efterfrågas, dela upp delar av ditt svar i för- och nackdelar. Dina för- respektive nackdelar skall vara i form av punktlistor med kortare stycken (3-4 meningar).
-
-Programkod ska se ut som exemplet nedan. Koden måste vara korrekt indenterad då den blir lättare att läsa vilket gör det lättare att hitta syntaktiska fel.
 
 ```
-function errorCallback(error) {
-    switch(error.code) {
-        case error.PERMISSION_DENIED:
-            // Geolocation API stöds inte, gör något
-            break;
-        case error.POSITION_UNAVAILABLE:
-            // Misslyckat positionsanrop, gör något
-            break;
-        case error.UNKNOWN_ERROR:
-            // Okänt fel, gör något
-            break;
+<WebView
+        android:id="@+id/my_webview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+public class MainActivity extends AppCompatActivity {
+
+    WebView myWebView;
+
+    public void showExternalWebPage(){
+        // TODO: Add your code for showing external web page here
+        myWebView.loadUrl("https://wwwlab.iit.his.se/b21ricni/");
     }
-}
+
+    public void showInternalWebPage(){
+        // TODO: Add your code for showing internal web page here
+        myWebView.loadUrl("file:///android_asset/about.html");
+    }
+
+    ..............................................
+    kod som inte ändrats mellan Övre och undre kod
+    ..............................................
+
+
+        myWebView =findViewById(R.id.my_webview);
+        myWebView.getSettings().setJavaScriptEnabled(true);
+        myWebView.loadUrl("file:///android_asset/about.html");
+        myWebView.setWebViewClient(new WebViewClient());
+
+    ...................
+    More unchanged code
+    ...................
+
+    if (id == R.id.action_external_web) {
+                Log.d("==>","Will display external web page");
+                showExternalWebPage();
+                return true;
+            }
+
+            if (id == R.id.action_internal_web) {
+                Log.d("==>","Will display internal web page");
+                showInternalWebPage();
+                return true;
+            }
+
 ```
-
-Bilder läggs i samma mapp som markdown-filen.
-
-![](android.png)
+![](external.png)
+![](internal.png)
 
 Läs gärna:
 
